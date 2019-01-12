@@ -7,6 +7,7 @@ import nipype.pipeline as pe
 
 import nipype.interfaces.io as io
 import nipype.interfaces.fsl as fsl
+import nipype.interfaces.utility as utility
 
 #Generic datagrabber module that wraps around glob in an
 my_io_S3DataGrabber = pe.Node(io.S3DataGrabber(outfields=["outfiles"]), name = 'my_io_S3DataGrabber')
@@ -20,14 +21,14 @@ my_io_S3DataGrabber.inputs.local_directory = '/tmp'
 #Wraps command **bet**
 my_fsl_BET = pe.Node(interface = fsl.BET(), name='my_fsl_BET', iterfield = [''])
 
-#Generic datasink module to store structured outputs
-my_io_DataSink = pe.Node(interface = io.DataSink(), name='my_io_DataSink', iterfield = [''])
-my_io_DataSink.inputs.base_directory = '/tmp'
+#Change the name of a file based on a mapped format string.
+my_utility_Rename = pe.Node(interface = utility.Rename(), name='my_utility_Rename', iterfield = [''])
+my_utility_Rename.inputs.format_string = "/output/skullstrip.nii.gz"
 
 #Create a workflow to connect all those nodes
 analysisflow = nipype.Workflow('MyWorkflow')
 analysisflow.connect(my_io_S3DataGrabber, "outfiles", my_fsl_BET, "in_file")
-analysisflow.connect(my_fsl_BET, "out_file", my_io_DataSink, "BET_results")
+analysisflow.connect(my_fsl_BET, "out_file", my_utility_Rename, "in_file")
 
 #Run the workflow
 plugin = 'MultiProc' #adjust your desired plugin here

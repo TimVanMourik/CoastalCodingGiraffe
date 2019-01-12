@@ -6,7 +6,7 @@
     },
     {
       "from": "5a47080",
-      "to": "759f7e8"
+      "to": "c0e84f34-4d8e-4e2e-b292-ab73758920c3"
     }
   ],
   "nodes": [
@@ -649,8 +649,8 @@
         }
       ],
       "position": [
-        -549.3724670410156,
-        -246.66925811767578
+        -579.7348022460938,
+        -274.3303756713867
       ],
       "title": {
         "code": [
@@ -676,16 +676,17 @@
     {
       "category": [
         "Nipype",
-        "io"
+        "utility",
+        "base"
       ],
       "ports": [
         {
-          "base": "BET_results",
+          "base": "in_file",
           "editable": true,
-          "id": "eade45cc-7d79-4f78-98aa-bc5ff8745593",
+          "id": "fe8dd930-b045-44d7-9538-f41e4f6a0330",
           "input": true,
-          "inputPort": "759f7e8",
-          "name": "BET_results",
+          "inputPort": "c0e84f34-4d8e-4e2e-b292-ab73758920c3",
+          "name": "in_file",
           "output": false,
           "outputPort": false,
           "value": "",
@@ -693,25 +694,25 @@
           "iterator": false
         },
         {
-          "base": "base_directory",
+          "base": "format_string",
           "editable": true,
-          "id": "a3c07600-033c-4b09-97aa-c0485bdd52a7",
+          "id": "e1e65873-ef03-4f56-96af-a7dd850be403",
           "input": true,
-          "inputPort": "75a04b8",
-          "name": "base_directory",
+          "inputPort": "1b07e757-f090-4ffe-a1e4-3c3df418a5b4",
+          "name": "format_string",
           "output": false,
           "outputPort": false,
-          "value": "'/tmp'",
+          "value": "\"/output/skullstrip.nii.gz\"",
           "visible": true,
           "iterator": false
         },
         {
-          "base": "container",
+          "base": "keep_ext",
           "editable": true,
-          "id": "ba32111f-a68c-40f0-83e2-e2cfc7aafd5c",
+          "id": "6e9ae325-8ff9-4252-b581-615accf2c32d",
           "input": true,
-          "inputPort": "75a0990",
-          "name": "container",
+          "inputPort": "9ed2ebee-ef88-4fba-ae1a-7f42200f6c14",
+          "name": "keep_ext",
           "output": false,
           "outputPort": false,
           "value": "",
@@ -719,12 +720,12 @@
           "iterator": false
         },
         {
-          "base": "parameterization",
+          "base": "parse_string",
           "editable": true,
-          "id": "09506800-8536-495b-ad04-610c2857ca91",
+          "id": "e2ef4586-b611-4edd-a07f-0842efd4333e",
           "input": true,
-          "inputPort": "75a1700",
-          "name": "parameterization",
+          "inputPort": "d9e50206-8493-496e-a45e-e4a7bdc4f222",
+          "name": "parse_string",
           "output": false,
           "outputPort": false,
           "value": "",
@@ -732,129 +733,12 @@
           "iterator": false
         },
         {
-          "base": "strip_dir",
+          "base": "use_fullpath",
           "editable": true,
-          "id": "f2d312f7-348c-4418-bc24-13bf5dace3f2",
+          "id": "597b47d7-a962-4fe8-a81b-f8fd26487202",
           "input": true,
-          "inputPort": "75a2088",
-          "name": "strip_dir",
-          "output": false,
-          "outputPort": false,
-          "value": "",
-          "visible": false,
-          "iterator": false
-        },
-        {
-          "base": "substitutions",
-          "editable": true,
-          "id": "4c83bc4e-c8b2-4bf3-9e75-8d751140e9e9",
-          "input": true,
-          "inputPort": "75a2da8",
-          "name": "substitutions",
-          "output": false,
-          "outputPort": false,
-          "value": "",
-          "visible": false,
-          "iterator": false
-        },
-        {
-          "base": "regexp_substitutions",
-          "editable": true,
-          "id": "5051d05a-645d-4b91-9625-49e09749db91",
-          "input": true,
-          "inputPort": "75a3cf8",
-          "name": "regexp_substitutions",
-          "output": false,
-          "outputPort": false,
-          "value": "",
-          "visible": false,
-          "iterator": false
-        },
-        {
-          "base": "_outputs",
-          "editable": true,
-          "id": "d4000e69-2d04-4377-a37a-0c8c177ee6ae",
-          "input": true,
-          "inputPort": "75a4c98",
-          "name": "_outputs",
-          "output": false,
-          "outputPort": false,
-          "value": "",
-          "visible": false,
-          "iterator": false
-        },
-        {
-          "base": "remove_dest_dir",
-          "editable": true,
-          "id": "ef19b192-73cb-4bb4-ba8e-b6b3f4fd2573",
-          "input": true,
-          "inputPort": "75a6930",
-          "name": "remove_dest_dir",
-          "output": false,
-          "outputPort": false,
-          "value": "",
-          "visible": false,
-          "iterator": false
-        },
-        {
-          "base": "creds_path",
-          "editable": true,
-          "id": "3c488fc5-7bcd-42fc-885f-898cedfbe8b7",
-          "input": true,
-          "inputPort": "75a78d0",
-          "name": "creds_path",
-          "output": false,
-          "outputPort": false,
-          "value": "",
-          "visible": false,
-          "iterator": false
-        },
-        {
-          "base": "encrypt_bucket_keys",
-          "editable": true,
-          "id": "49c83abe-7965-4225-a53e-67d87dee026e",
-          "input": true,
-          "inputPort": "75a7f10",
-          "name": "encrypt_bucket_keys",
-          "output": false,
-          "outputPort": false,
-          "value": "",
-          "visible": false,
-          "iterator": false
-        },
-        {
-          "base": "bucket",
-          "editable": true,
-          "id": "687004c7-2ea5-40ea-931c-46a37793566b",
-          "input": true,
-          "inputPort": "75a9338",
-          "name": "bucket",
-          "output": false,
-          "outputPort": false,
-          "value": "",
-          "visible": false,
-          "iterator": false
-        },
-        {
-          "base": "local_copy",
-          "editable": true,
-          "id": "5f2356f3-a694-4a07-9fb5-e6ea3cbe494a",
-          "input": true,
-          "inputPort": "75aa120",
-          "name": "local_copy",
-          "output": false,
-          "outputPort": false,
-          "value": "",
-          "visible": false,
-          "iterator": false
-        },
-        {
-          "base": "ignore_exception",
-          "editable": true,
-          "id": "85617d08-980c-40d5-8def-68bbc3c721b2",
-          "input": true,
-          "inputPort": "75aaa58",
-          "name": "ignore_exception",
+          "inputPort": "ae7312bb-57af-429a-9265-8c43d6292d73",
+          "name": "use_fullpath",
           "output": false,
           "outputPort": false,
           "value": "",
@@ -864,40 +748,40 @@
         {
           "base": "out_file",
           "editable": false,
-          "id": "5fb13ec4-498c-4e09-ad22-0bae0b1a8137",
+          "id": "8735aeaf-fb12-4297-a1b9-805b9cd09bda",
           "input": false,
           "inputPort": false,
           "name": "out_file",
           "output": true,
-          "outputPort": "75ab4a8",
+          "outputPort": "bc03073c-f7bd-4421-8696-e340d167ec0a",
           "value": "",
-          "visible": false,
+          "visible": true,
           "iterator": false
         }
       ],
       "position": [
-        -335.29290771484375,
-        -179.22599029541016
+        -421.3312101075676,
+        -312.66989477013203
       ],
       "title": {
         "code": [
           {
+            "language": "Nipype",
+            "comment": "Change the name of a file based on a mapped format string.",
             "argument": {
-              "import": "import nipype.interfaces.io as io",
-              "name": "io.DataSink()"
-            },
-            "comment": "Generic datasink module to store structured outputs",
-            "language": "Nipype"
+              "name": "utility.Rename()",
+              "import": "import nipype.interfaces.utility as utility"
+            }
           },
           {
+            "language": "Docker",
             "argument": {
-              "name": "Nipype, io"
-            },
-            "language": "Docker"
+              "name": "Nipype, utility"
+            }
           }
         ],
-        "name": "io.DataSink",
-        "web_url": "https://nipype.readthedocs.io/en/latest/interfaces/generated/nipype.interfaces.io.html#datasink"
+        "name": "utility.Rename",
+        "web_url": "https://nipype.readthedocs.io/en/latest/interfaces/generated/interfaces.utility/base.html#rename"
       }
     }
   ],

@@ -12,6 +12,7 @@ import nipype.interfaces.fsl as fsl
 my_io_S3DataGrabber = pe.Node(io.S3DataGrabber(outfields=["func, anat"]), name = 'my_io_S3DataGrabber')
 my_io_S3DataGrabber.inputs.bucket = 'openneuro'
 my_io_S3DataGrabber.inputs.sort_filelist = True
+my_io_S3DataGrabber.inputs.template = ''
 my_io_S3DataGrabber.inputs.anon = True
 my_io_S3DataGrabber.inputs.bucket_path = 'ds000101/ds000101_R2.0.0/uncompressed/'
 my_io_S3DataGrabber.inputs.local_directory = '/tmp'

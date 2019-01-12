@@ -63,7 +63,7 @@
           "name": "template",
           "output": false,
           "outputPort": false,
-          "value": "",
+          "value": "''",
           "visible": true,
           "iterator": false
         },
@@ -186,8 +186,8 @@
         }
       ],
       "position": [
-        -1103.1384887695312,
-        -249.52322387695312
+        -1093.3953247070312,
+        -216.1180443763733
       ],
       "title": {
         "code": [

@@ -63,7 +63,7 @@
           "name": "template",
           "output": false,
           "outputPort": false,
-          "value": "''",
+          "value": "'.*'",
           "visible": true,
           "iterator": false
         },

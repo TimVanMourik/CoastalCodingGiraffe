@@ -39,6 +39,7 @@ fsl_FLIRT = pe.Node(interface = fsl.FLIRT(), name='fsl_FLIRT', iterfield = [''])
 
 #Wraps command **mcflirt**
 fsl_MCFLIRT = pe.Node(interface = fsl.MCFLIRT(), name='fsl_MCFLIRT', iterfield = [''])
+fsl_MCFLIRT.inputs.mean_vol = True
 
 #Change the name of a file based on a mapped format string.
 rename_realigned = pe.Node(interface = utility.Rename(), name='rename_realigned', iterfield = [''])

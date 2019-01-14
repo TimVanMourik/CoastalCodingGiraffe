@@ -7,28 +7,27 @@ import nipype.pipeline as pe
 
 import nipype.interfaces.io as io
 import nipype.interfaces.fsl as fsl
-import nipype.interfaces.utility as utility
 
 #Generic datagrabber module that wraps around glob in an
-my_io_S3DataGrabber = pe.Node(io.S3DataGrabber(outfields=["outfiles"]), name = 'my_io_S3DataGrabber')
-my_io_S3DataGrabber.inputs.bucket = 'openneuro'
-my_io_S3DataGrabber.inputs.sort_filelist = True
-my_io_S3DataGrabber.inputs.template = 'sub-01/anat/sub-01_T1w.nii.gz'
-my_io_S3DataGrabber.inputs.anon = True
-my_io_S3DataGrabber.inputs.bucket_path = 'ds000101/ds000101_R2.0.0/uncompressed/'
-my_io_S3DataGrabber.inputs.local_directory = '/tmp'
+data_from_openneuro = pe.Node(io.S3DataGrabber(outfields=["outfiles"]), name = 'data_from_openneuro')
+data_from_openneuro.inputs.bucket = 'openneuro'
+data_from_openneuro.inputs.sort_filelist = True
+data_from_openneuro.inputs.template = 'sub-01/anat/sub-01_T1w.nii.gz'
+data_from_openneuro.inputs.anon = True
+data_from_openneuro.inputs.bucket_path = 'ds000101/ds000101_R2.0.0/uncompressed/'
+data_from_openneuro.inputs.local_directory = '/tmp'
 
 #Wraps command **bet**
-my_fsl_BET = pe.Node(interface = fsl.BET(), name='my_fsl_BET', iterfield = [''])
+brain_extraction = pe.Node(interface = fsl.BET(), name='brain_extraction', iterfield = [''])
 
-#Change the name of a file based on a mapped format string.
-my_utility_Rename = pe.Node(interface = utility.Rename(), name='my_utility_Rename', iterfield = [''])
-my_utility_Rename.inputs.format_string = "/output/skullstrip.nii.gz"
+#Generic datasink module to store structured outputs
+save_data = pe.Node(interface = io.DataSink(), name='save_data', iterfield = [''])
+save_data.inputs.base_directory = '/tmp'
 
 #Create a workflow to connect all those nodes
 analysisflow = nipype.Workflow('MyWorkflow')
-analysisflow.connect(my_io_S3DataGrabber, "outfiles", my_fsl_BET, "in_file")
-analysisflow.connect(my_fsl_BET, "out_file", my_utility_Rename, "in_file")
+analysisflow.connect(data_from_openneuro, "outfiles", brain_extraction, "in_file")
+analysisflow.connect(brain_extraction, "out_file", save_data, "BET_results")
 
 #Run the workflow
 plugin = 'MultiProc' #adjust your desired plugin here

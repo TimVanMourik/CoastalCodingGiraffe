@@ -17,7 +17,7 @@
       "to": "6517deb9-f9ff-48da-bc84-ffb024102ed7"
     },
     {
-      "from": "9e6ad1c1-023b-48e9-b7ac-8ede8891d304",
+      "from": "01ff5da6-2389-4529-ba0f-24910a571e7b",
       "to": "0fdf1743-932f-47b7-a7c9-97c20e863a84"
     }
   ],
@@ -1329,7 +1329,7 @@
           "name": "format_string",
           "output": false,
           "outputPort": false,
-          "value": "'/output/registered.nii.gz'",
+          "value": "\"/output/registered.nii.gz\"",
           "visible": true,
           "iterator": false
         },
@@ -1387,8 +1387,8 @@
         }
       ],
       "position": [
-        -157.44358751794454,
-        -168.4022200010121
+        -161.63174364587422,
+        -180.96670364359022
       ],
       "title": {
         "code": [

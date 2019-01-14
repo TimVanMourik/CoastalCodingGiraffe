@@ -35,7 +35,7 @@ fsl_EpiReg = pe.Node(interface = fsl.EpiReg(), name='fsl_EpiReg', iterfield = ['
 
 #Change the name of a file based on a mapped format string.
 utility_Rename = pe.Node(interface = utility.Rename(), name='utility_Rename', iterfield = [''])
-utility_Rename.inputs.format_string = '/output/registered.nii.gz'
+utility_Rename.inputs.format_string = "/output/registered.nii.gz"
 
 #Create a workflow to connect all those nodes
 analysisflow = nipype.Workflow('MyWorkflow')
@@ -43,7 +43,7 @@ analysisflow.connect(anat_from_openneuro, "anat", brain_extraction, "in_file")
 analysisflow.connect(func_from_openneuro, "func", fsl_EpiReg, "epi")
 analysisflow.connect(anat_from_openneuro, "anat", fsl_EpiReg, "t1_head")
 analysisflow.connect(brain_extraction, "out_file", fsl_EpiReg, "t1_brain")
-analysisflow.connect(fsl_EpiReg, "out_file", utility_Rename, "in_file")
+analysisflow.connect(fsl_EpiReg, "out_1vol", utility_Rename, "in_file")
 
 #Run the workflow
 plugin = 'MultiProc' #adjust your desired plugin here

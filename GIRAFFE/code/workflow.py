@@ -25,7 +25,7 @@ brain_extraction = pe.Node(interface = fsl.BET(), name='brain_extraction', iterf
 func_from_openneuro = pe.Node(io.S3DataGrabber(outfields=["func"]), name = 'func_from_openneuro')
 func_from_openneuro.inputs.bucket = 'openneuro'
 func_from_openneuro.inputs.sort_filelist = True
-func_from_openneuro.inputs.template = 'sub-01/func/sub-01_T1w.nii.gz'
+func_from_openneuro.inputs.template = 'sub-01/func/sub-01_task-simon_run-1_bold.nii.gz'
 func_from_openneuro.inputs.anon = True
 func_from_openneuro.inputs.bucket_path = 'ds000101/ds000101_R2.0.0/uncompressed/'
 func_from_openneuro.inputs.local_directory = '/tmp'

@@ -30,20 +30,23 @@ func_from_openneuro.inputs.anon = True
 func_from_openneuro.inputs.bucket_path = 'ds000101/ds000101_R2.0.0/uncompressed/'
 func_from_openneuro.inputs.local_directory = '/tmp'
 
-#Wraps command **epi_reg**
-fsl_EpiReg = pe.Node(interface = fsl.EpiReg(), name='fsl_EpiReg', iterfield = [''])
-
 #Change the name of a file based on a mapped format string.
 utility_Rename = pe.Node(interface = utility.Rename(), name='utility_Rename', iterfield = [''])
 utility_Rename.inputs.format_string = "/output/registered.nii.gz"
 
+#Wraps command **flirt**
+fsl_FLIRT = pe.Node(interface = fsl.FLIRT(), name='fsl_FLIRT', iterfield = [''])
+
+#Wraps command **mcflirt**
+fsl_MCFLIRT = pe.Node(interface = fsl.MCFLIRT(), name='fsl_MCFLIRT', iterfield = [''])
+
 #Create a workflow to connect all those nodes
 analysisflow = nipype.Workflow('MyWorkflow')
 analysisflow.connect(anat_from_openneuro, "anat", brain_extraction, "in_file")
-analysisflow.connect(func_from_openneuro, "func", fsl_EpiReg, "epi")
-analysisflow.connect(anat_from_openneuro, "anat", fsl_EpiReg, "t1_head")
-analysisflow.connect(brain_extraction, "out_file", fsl_EpiReg, "t1_brain")
-analysisflow.connect(fsl_EpiReg, "out_1vol", utility_Rename, "in_file")
+analysisflow.connect(func_from_openneuro, "func", fsl_MCFLIRT, "in_file")
+analysisflow.connect(brain_extraction, "out_file", fsl_FLIRT, "in_file")
+analysisflow.connect(fsl_MCFLIRT, "out_file", fsl_FLIRT, "reference")
+analysisflow.connect(fsl_FLIRT, "out_file", utility_Rename, "in_file")
 
 #Run the workflow
 plugin = 'MultiProc' #adjust your desired plugin here

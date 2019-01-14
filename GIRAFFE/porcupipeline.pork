@@ -13,12 +13,16 @@
       "to": "e0ef0be4-53c1-4fda-99d0-65ed1ec513ea"
     },
     {
-      "from": "17da1138-6e7a-4baf-97bb-48618ad6e4fe",
+      "from": "3cc03731-dbcc-40fa-a824-ea39d2b5fe44",
+      "to": "0fdf1743-932f-47b7-a7c9-97c20e863a84"
+    },
+    {
+      "from": "b4b6ffde-1e42-4d4d-92f8-ea58a5632ac2",
       "to": "8ca9c3aa-b4a1-449f-bfc6-2a203ade2e1a"
     },
     {
-      "from": "3cc03731-dbcc-40fa-a824-ea39d2b5fe44",
-      "to": "0fdf1743-932f-47b7-a7c9-97c20e863a84"
+      "from": "17da1138-6e7a-4baf-97bb-48618ad6e4fe",
+      "to": "cc64ce4a-a55b-4062-a1f9-19f35f0418a5"
     }
   ],
   "nodes": [
@@ -173,8 +177,8 @@
         }
       ],
       "position": [
-        -943.4000244140625,
-        -377.6442139148712
+        -540.7034606933594,
+        -459.95083928108215
       ],
       "title": {
         "code": [
@@ -662,8 +666,8 @@
         }
       ],
       "position": [
-        -634.3499450683594,
-        -182.13049983978271
+        -250.26079154014587,
+        -243.24979305267334
       ],
       "title": {
         "code": [
@@ -838,8 +842,8 @@
         }
       ],
       "position": [
-        -878.5424656694624,
-        -41.73949562371695
+        -961.0773167436812,
+        -33.48600899041617
       ],
       "title": {
         "code": [
@@ -950,8 +954,8 @@
         }
       ],
       "position": [
-        -154.75385210534688,
-        -64.04234861353041
+        236.99505307653789,
+        42.397140751093616
       ],
       "title": {
         "code": [
@@ -970,7 +974,7 @@
             }
           }
         ],
-        "name": "utility_Rename",
+        "name": "rename_registered",
         "class": "utility.Rename",
         "web_url": "https://nipype.readthedocs.io/en/latest/interfaces/generated/interfaces.utility/base.html#rename"
       }
@@ -1699,8 +1703,8 @@
         }
       ],
       "position": [
-        -357.3865239923256,
-        -86.77236526929708
+        29.054451196883406,
+        -30.10520523511741
       ],
       "title": {
         "code": [
@@ -2149,8 +2153,8 @@
         }
       ],
       "position": [
-        -562.3480522726077,
-        -8.364284394629635
+        -609.1177971456545,
+        -5.613117097266354
       ],
       "title": {
         "code": [
@@ -2172,6 +2176,118 @@
         "name": "fsl_MCFLIRT",
         "class": "fsl.MCFLIRT",
         "web_url": "https://nipype.readthedocs.io/en/latest/interfaces/generated/interfaces.fsl/preprocess.html#mcflirt"
+      }
+    },
+    {
+      "category": [
+        "Nipype",
+        "utility",
+        "base"
+      ],
+      "ports": [
+        {
+          "base": "in_file",
+          "editable": true,
+          "id": "acb145ff-793e-4e92-af55-a39bcf540651",
+          "input": true,
+          "inputPort": "cc64ce4a-a55b-4062-a1f9-19f35f0418a5",
+          "name": "in_file",
+          "output": false,
+          "outputPort": false,
+          "value": "",
+          "visible": true,
+          "iterator": false
+        },
+        {
+          "base": "format_string",
+          "editable": true,
+          "id": "ac8a79d4-e58b-4a64-ac86-fbbb97b3985c",
+          "input": true,
+          "inputPort": "ee506703-404d-4829-a625-2297ae6bff32",
+          "name": "format_string",
+          "output": false,
+          "outputPort": false,
+          "value": "\"/output/realigned.nii.gz\"",
+          "visible": true,
+          "iterator": false
+        },
+        {
+          "base": "keep_ext",
+          "editable": true,
+          "id": "1efa2938-c1e9-488e-9792-554670b94fbf",
+          "input": true,
+          "inputPort": "354f47d0-3bdb-4a90-8b87-6c4df8466b0e",
+          "name": "keep_ext",
+          "output": false,
+          "outputPort": false,
+          "value": "",
+          "visible": false,
+          "iterator": false
+        },
+        {
+          "base": "parse_string",
+          "editable": true,
+          "id": "99956654-3ab8-48be-9abd-a1917793ca91",
+          "input": true,
+          "inputPort": "d0497d5c-a6ba-4d05-b465-ba10abbbe91a",
+          "name": "parse_string",
+          "output": false,
+          "outputPort": false,
+          "value": "",
+          "visible": false,
+          "iterator": false
+        },
+        {
+          "base": "use_fullpath",
+          "editable": true,
+          "id": "18d3940b-c94c-45b5-abea-785fc13030ab",
+          "input": true,
+          "inputPort": "d78fec97-cd8d-4995-bf8f-5a4ca7b8082f",
+          "name": "use_fullpath",
+          "output": false,
+          "outputPort": false,
+          "value": "",
+          "visible": false,
+          "iterator": false
+        },
+        {
+          "base": "out_file",
+          "editable": false,
+          "id": "282cf3ac-8ed9-4cc5-b5dd-5a35e08b4f88",
+          "input": false,
+          "inputPort": false,
+          "name": "out_file",
+          "output": true,
+          "outputPort": "4fb38e94-c15c-461b-b8de-02af125c4212",
+          "value": "",
+          "visible": true,
+          "iterator": false
+        }
+      ],
+      "position": [
+        -420.1460370423727,
+        -68.5282435609302
+      ],
+      "title": {
+        "code": [
+          {
+            "language": "Nipype",
+            "comment": "Change the name of a file based on a mapped format string.",
+            "argument": {
+              "name": "utility.Rename()",
+              "import": "import nipype.interfaces.utility as utility"
+            }
+          },
+          {
+            "language": "Docker",
+            "argument": {
+              "name": "Nipype, utility"
+            }
+          }
+        ],
+        "name": "rename_realigned",
+        "class": "utility.Rename",
+        "web_url": "https://nipype.readthedocs.io/en/latest/interfaces/generated/interfaces.utility/base.html#rename"
       }
     }
   ],

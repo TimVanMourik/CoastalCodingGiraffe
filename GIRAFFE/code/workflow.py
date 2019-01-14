@@ -7,27 +7,43 @@ import nipype.pipeline as pe
 
 import nipype.interfaces.io as io
 import nipype.interfaces.fsl as fsl
+import nipype.interfaces.utility as utility
 
 #Generic datagrabber module that wraps around glob in an
-data_from_openneuro = pe.Node(io.S3DataGrabber(outfields=["outfiles"]), name = 'data_from_openneuro')
-data_from_openneuro.inputs.bucket = 'openneuro'
-data_from_openneuro.inputs.sort_filelist = True
-data_from_openneuro.inputs.template = 'sub-01/anat/sub-01_T1w.nii.gz'
-data_from_openneuro.inputs.anon = True
-data_from_openneuro.inputs.bucket_path = 'ds000101/ds000101_R2.0.0/uncompressed/'
-data_from_openneuro.inputs.local_directory = '/tmp'
+anat_from_openneuro = pe.Node(io.S3DataGrabber(outfields=["anat"]), name = 'anat_from_openneuro')
+anat_from_openneuro.inputs.bucket = 'openneuro'
+anat_from_openneuro.inputs.sort_filelist = True
+anat_from_openneuro.inputs.template = 'sub-01/anat/sub-01_T1w.nii.gz'
+anat_from_openneuro.inputs.anon = True
+anat_from_openneuro.inputs.bucket_path = 'ds000101/ds000101_R2.0.0/uncompressed/'
+anat_from_openneuro.inputs.local_directory = '/tmp'
 
 #Wraps command **bet**
 brain_extraction = pe.Node(interface = fsl.BET(), name='brain_extraction', iterfield = [''])
 
-#Generic datasink module to store structured outputs
-save_data = pe.Node(interface = io.DataSink(), name='save_data', iterfield = [''])
-save_data.inputs.base_directory = '/tmp'
+#Generic datagrabber module that wraps around glob in an
+func_from_openneuro = pe.Node(io.S3DataGrabber(outfields=["func"]), name = 'func_from_openneuro')
+func_from_openneuro.inputs.bucket = 'openneuro'
+func_from_openneuro.inputs.sort_filelist = True
+func_from_openneuro.inputs.template = 'sub-01/func/sub-01_T1w.nii.gz'
+func_from_openneuro.inputs.anon = True
+func_from_openneuro.inputs.bucket_path = 'ds000101/ds000101_R2.0.0/uncompressed/'
+func_from_openneuro.inputs.local_directory = '/tmp'
+
+#Wraps command **epi_reg**
+fsl_EpiReg = pe.Node(interface = fsl.EpiReg(), name='fsl_EpiReg', iterfield = [''])
+
+#Change the name of a file based on a mapped format string.
+utility_Rename = pe.Node(interface = utility.Rename(), name='utility_Rename', iterfield = [''])
+utility_Rename.inputs.format_string = '/output/registered.nii.gz'
 
 #Create a workflow to connect all those nodes
 analysisflow = nipype.Workflow('MyWorkflow')
-analysisflow.connect(data_from_openneuro, "outfiles", brain_extraction, "in_file")
-analysisflow.connect(brain_extraction, "out_file", save_data, "BET_results")
+analysisflow.connect(anat_from_openneuro, "anat", brain_extraction, "in_file")
+analysisflow.connect(func_from_openneuro, "func", fsl_EpiReg, "epi")
+analysisflow.connect(anat_from_openneuro, "anat", fsl_EpiReg, "t1_head")
+analysisflow.connect(brain_extraction, "out_file", fsl_EpiReg, "t1_brain")
+analysisflow.connect(fsl_EpiReg, "out_file", utility_Rename, "in_file")
 
 #Run the workflow
 plugin = 'MultiProc' #adjust your desired plugin here

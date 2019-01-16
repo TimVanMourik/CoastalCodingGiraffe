@@ -177,8 +177,8 @@
         }
       ],
       "position": [
-        -540.7034606933594,
-        -459.95083928108215
+        -648.66015625,
+        -461.538455247879
       ],
       "title": {
         "code": [
@@ -954,8 +954,8 @@
         }
       ],
       "position": [
-        236.99505307653789,
-        42.397140751093616
+        235.75976254919414,
+        39.92656732580065
       ],
       "title": {
         "code": [
@@ -2153,8 +2153,8 @@
         }
       ],
       "position": [
-        -609.1177971456545,
-        -5.613117097266354
+        -626.5814201925295,
+        -8.788314221747555
       ],
       "title": {
         "code": [
@@ -2285,7 +2285,7 @@
             }
           }
         ],
-        "name": "rename_realigned",
+        "name": "save_realigned",
         "class": "utility.Rename",
         "web_url": "https://nipype.readthedocs.io/en/latest/interfaces/generated/interfaces.utility/base.html#rename"
       }

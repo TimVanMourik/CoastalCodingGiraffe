@@ -42,8 +42,8 @@ fsl_MCFLIRT = pe.Node(interface = fsl.MCFLIRT(), name='fsl_MCFLIRT', iterfield =
 fsl_MCFLIRT.inputs.mean_vol = True
 
 #Change the name of a file based on a mapped format string.
-rename_realigned = pe.Node(interface = utility.Rename(), name='rename_realigned', iterfield = [''])
-rename_realigned.inputs.format_string = "/output/realigned.nii.gz"
+save_realigned = pe.Node(interface = utility.Rename(), name='save_realigned', iterfield = [''])
+save_realigned.inputs.format_string = "/output/realigned.nii.gz"
 
 #Create a workflow to connect all those nodes
 analysisflow = nipype.Workflow('MyWorkflow')
@@ -52,7 +52,7 @@ analysisflow.connect(func_from_openneuro, "func", fsl_MCFLIRT, "in_file")
 analysisflow.connect(brain_extraction, "out_file", fsl_FLIRT, "in_file")
 analysisflow.connect(fsl_FLIRT, "out_file", rename_registered, "in_file")
 analysisflow.connect(fsl_MCFLIRT, "mean_img", fsl_FLIRT, "reference")
-analysisflow.connect(fsl_MCFLIRT, "out_file", rename_realigned, "in_file")
+analysisflow.connect(fsl_MCFLIRT, "out_file", save_realigned, "in_file")
 
 #Run the workflow
 plugin = 'MultiProc' #adjust your desired plugin here
